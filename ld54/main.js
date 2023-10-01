@@ -651,6 +651,7 @@ gc.setGameStep((step) => {
 });
 
 const splash_image = document.getElementById('splash_image');
+splash_image.onload = () => keep_alive();
 gc.setDraw((paused, interp) => {
 	if(paused){
 	}else{
