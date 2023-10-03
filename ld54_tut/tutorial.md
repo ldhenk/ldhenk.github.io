@@ -14,9 +14,9 @@
 
 ![two regions highlighted](tut_d.png)
 
-### Blocks will be copied to the destination
+### Blocks will be moved to the destination
 
-![some blocks copied from first region to second region, two green blocks added](tut_e.png)
+![some blocks moved from first region to second region, two green blocks added](tut_e.png)
 
 The list in the upper right shows which blocks
 will be added or removed after your turn (here two
