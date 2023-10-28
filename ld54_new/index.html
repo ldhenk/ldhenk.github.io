@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="utf-8">
 <title>Defrag 54</title>
 <style>
@@ -20,7 +21,7 @@ body {
 canvas {
 	background-color: white;
 	color: black;
-	max-width: 90%;
+	max-width: 98%;
 	outline: none;
 	margin-top: 3rem;
 }
@@ -46,12 +47,29 @@ a {
 	<canvas tabindex="0" width="500" height="500">Canvas support required</canvas>
 </div>
 <div class="info-container">
-	<p>This is the original version submitted as part of Ludum Dare 54.
-	<p><a href="../ld54_new">Go here for the latest version</a>
+	<p><a href="../ld54">Original</a>
+	<details>
+		<summary>Old Instructions</summary>
+
+		<p>Click to begin selecting a region, then
+		click again to complete the selection.  Click
+		somewhere empty to move the selected
+		blocks to that location.  Click "pass" to skip
+		your move for this turn.
+
+		<p>After you make a move, some number of
+		blocks will be added or removed.  The game
+		ends when there isn't enough space for new
+		blocks to be added.
+
+		<p>Two blocks of different colors can't be
+		directly adjacent.  Try grouping similar
+		colors to save space.
+	</details>
 </div>
-<img id="splash_image" style="display:none" src="res/defrag_splash.png">
 
 <script src="lib/GameController.js"></script>
 <script src="main.js"></script>
+
 </body>
 </html>
