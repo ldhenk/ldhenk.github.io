@@ -4,13 +4,17 @@ const can = document.querySelector('canvas');
 const ctx = can.getContext('2d');
 const gc = new GameController();
 
-
-const ac = new AudioContext();
-console.log('^^ if you see a warning about the AudioContext being blocked ' +
-	'but sound still works, you can ignore the warning');
+let ac = null;
+if('AudioContext' in window){
+	ac = new AudioContext();
+	console.log('^^ if you see a warning about the AudioContext being blocked ' +
+		'but sound still works, you can ignore the warning');
+}
 
 const playback_buffers = Object.create(null);
 function prepare_sounds(files){
+	if(ac === null) return;
+
 	let proms = [];
 	for(const file of files){
 		let existing_buffer = playback_buffers[file];
@@ -50,6 +54,8 @@ prepare_sounds([
 ]);
 
 async function play_sound(file){
+	if(ac === null) return;
+
 	if(ac.state === 'suspended'){
 		ac.resume();
 	}
