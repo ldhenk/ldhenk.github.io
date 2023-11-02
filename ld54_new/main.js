@@ -692,7 +692,7 @@ can.onmousedown = (e) => {
 };
 
 can.oncontextmenu = (e) => {
-	if(anywhere_click_allowed(false) && !menu && !loss){
+	if(anywhere_click_allowed(false) && cell_click_allowed(-1) && !menu && !loss){
 		if(selecting !== -1 || selected !== -1){
 			e.preventDefault();
 			play_sound('res/bm.wav');
