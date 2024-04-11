@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<title>The Cleansing (Ludum Dare 55)</title>
+<style>
+* {
+	box-sizing: border-box;
+}
+
+body {
+	background-color: #111111;
+	color: #EEEEEE;
+}
+
+.container {
+	text-align: center;
+}
+
+.canvas-container {
+	width: 500px;
+	height: 500px;
+	margin-top: 3rem;
+	max-width: 98%;
+	position: relative;
+	display: inline-block;
+}
+
+canvas {
+	background-color: black;
+	color: black;
+	outline: none;
+	image-rendering: crisp-edges;
+	image-rendering: pixelated;
+	width: 100%;
+	height: 100%;
+}
+
+#game-over-overlay {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: black;
+	color: red;
+	font-family: serif;
+	top: 0px;
+	left: 0px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 2rem;
+	padding: 1rem;
+}
+
+#game-over-overlay:not(.visible){
+	visibility: hidden;
+}
+
+.info-container {
+	font-family: sans-serif;
+	font-weight: bold;
+	font-size: 20px;
+	text-align: center;
+	max-width: 500px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.controls-container {
+	display: inline-flex;
+	flex-direction: column;
+}
+
+.controls-container child {
+	display: flex;
+}
+
+.controls-container child control {
+	flex-grow: 1;
+	flex-basis: auto;
+	flex-shrink: 0;
+	text-align: left;
+}
+
+.controls-container child explanation {
+	flex-grow: 0;
+	flex-basis: auto;
+	flex-shrink: 0;
+	text-align: right;
+}
+
+
+a {
+	color: cyan;
+}
+
+</style>
+</head>
+<body>
+<div class="container">
+	<div class="canvas-container">
+		<canvas tabindex="0" width="125" height="125">Canvas support required</canvas>
+		<div id="game-over-overlay">
+			<div class="inner">
+				Placeholder Text
+			</div>
+		</div>
+	</div>
+</div>
+<div class="info-container">
+	<h3>The Cleansing</h3>
+	<div class="controls-container">
+		<child><control>W,A,S,D:&nbsp;&nbsp;&nbsp;&nbsp;</control><explanation>Move</explanation></child>
+		<child><control>Mouse:&nbsp;</control><explanation>Rotate</explanation></child>
+		<child><control>Esc:&nbsp;</control><explanation>Pause</explanation></child>
+	</div>
+</div>
+
+<script src="lib/GameController.js"></script>
+<script src="lib/MatrixHelper.js"></script>
+<script src="lib/GLController.js"></script>
+<script src="lib/create_sound_manager.js"></script>
+<script src="level.js"></script> 
+<script src="main.js"></script>
+
+</body>
+</html>
