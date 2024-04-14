@@ -70,6 +70,7 @@ function create_sound_manager(initial_sounds){
 
 
 	function play_artificial_sound(type, frequency, opts){
+		if(ac === null) return null;
 		if(!opts) opts = {};
 
 		if(ac.state === 'suspended'){
