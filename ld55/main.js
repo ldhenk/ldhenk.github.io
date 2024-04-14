@@ -1045,7 +1045,7 @@ tex_element.onload = () => {
 	};
 
 	can.onkeydown = (e) => {
-		if(sounds.ac.state === 'suspended'){
+		if(sounds.ac && sounds.ac.state === 'suspended'){
 			sounds.ac.resume();
 		}
 
