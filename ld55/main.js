@@ -1063,10 +1063,18 @@ tex_element.onload = () => {
 		probably_have_lock = true;
 	};
 
+	let last_movement_x = 0;
+	let last_movement_y = 0;
 	can.onmousemove = (e) => {
 		if(locked){
-			pi -= e.movementY / 800;
-			ya -= e.movementX / 800;
+			let dx = e.movementX;
+			let dy = e.movementY;
+			if(Math.abs(dx) > 300) dx = last_movement_x;
+			if(Math.abs(dy) > 300) dy = last_movement_y;
+			last_movement_x = dx;
+			last_movement_y = dy;
+			pi -= dy / 800;
+			ya -= dx / 800;
 			pip = pi;
 			yap = ya;
 		}
