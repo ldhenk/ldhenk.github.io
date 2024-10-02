@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head>
+<title>Howard and the Ants</title>
+<link rel="icon" href="res/favicon.ico">
+</head>
+<style>
+* { 
+	box-sizing: border-box;
+}
+
+#inv {
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	background-color: black;
+	display: flex;
+	flex-direction: column;
+	width: 60px;
+	border-bottom-left-radius: 16px;
+	opacity: .7;
+	text-align: left;
+	padding-left: 8px;
+}
+
+#spacer {
+	flex-basis: 24px;
+}
+.inv-item:not(:last-child) {
+	flex-basis: 48px;
+}
+.inv-item:last-child {
+	flex-basis: 32px;
+}
+
+.inv-item.selected {
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+#popup {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	display: none;
+}
+
+#popup > div {
+	padding: 20px;
+	height: 100%;
+}
+
+#popup > div > div {
+	padding: 20px;
+	background-color: #3b004a;
+	border-radius: 20px;
+	height: 100%;
+	border-style: solid;
+	border-width: 2px;
+	border-color: white;
+	font-family: sans-serif;
+	font-weight: bold;
+	display: flex;
+	flex-direction: column;
+}
+
+#pause-indicator {
+	position: absolute;
+	top: 0px; left: 0px; right: 0px; bottom: 0px;
+	background-color: #000000aa;
+	font-size: 3rem;
+	font-family: sans-serif;
+	font-weight: bold;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
+
+</style>
+<body style="background-color: #332211; color: #dddddd; text-align: center">
+<h1>Howard and the Ants</h1>
+<div style="display: inline-block; max-width: 95%; position: relative">
+	<canvas style="vertical-align: middle; outline: none; max-width: 100%; image-rendering: crisp-edges; image-rendering: pixelated" tabindex="0" id="canvas" width="512" height="512"></canvas>
+	<div id="inv">
+		<div id="spacer"></div>
+		<div id="inv-stone" class="inv-item">x0</div>
+		<div id="inv-dirt" class="inv-item">x0</div>
+		<div id="inv-worm" class="inv-item">x0</div>
+		<div id="inv-gold" class="inv-item">x0</div>
+	</div>
+	<div id="popup">
+		<div>
+			<div>
+				<div><h2 id="popup-title">Title Text</h2></div>
+				<div id="popup-content" style="flex-grow: 1">Placeholder Content text</div>
+				<div>(Press Enter to dismiss)</div>
+			</div>
+		</div>
+	</div>
+	<div id="pause-indicator">
+		<div>
+			Loading...
+		</div>
+	</div>
+</div>
+
+<div style="font-family: sans-serif; font-weight: bold; font-size: 1.25rem">
+	<p>Press H for help!
+	<details>
+		<summary>Click for Hints</summary>
+		<div style="margin: auto; max-width: 500px; text-align: left">
+			<ul>
+				<li>There is an objective!  Keep searching.  Use the map
+					to see which areas are unexplored.
+				<li>Throw pebbles to defend yourself from the ants.
+				<li>Ants don't like the light.
+				<li>Glow worms can be picked up.  Placing more down requires patience.
+			</ul>
+		</div>
+	</details>
+</div>
+
+<script src="lib/GameController.js"></script>
+<script src="lib/MatrixHelper.js"></script>
+<script src="lib/GLController.js"></script>
+<script src="lib/create_sound_manager.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
