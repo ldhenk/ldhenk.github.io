@@ -779,21 +779,25 @@ gc.setGameStep((t) => {
 		level[i] = prev;
 		i = ind(px, py);
 
-		let success = true;
+		let success = false;
 		if(selected === 'stone' && invTryRemove('stone', 1)){
 			items.push({
 				x: winx, y: winy,
 				xv: launchv * mx,
 				yv: launchv * -my
 			});
-			success = false;
 		}else if(selected === 'worm' && level[i] === 0 && dirtback(levelcoord(px), levelcoord(py))){ //TODO use same logic as for background dirt
-			if(invTryRemove('worm', 1)) level[i] = 4;
+			if(invTryRemove('worm', 1)){
+				success = true;
+				level[i] = 4;
+			}
 		}else if(selected === 'dirt' && level[i] === 0 && invTryRemove('dirt', 1)){
+			success = true;
 			level[i] = 1;
 		}else if(selected === 'gold' && level[i] === 0 && invTryRemove('gold', 4)){
+			success = true;
 			level[i] = 6;
-		}else success = false;
+		}
 
 		if(success){
 			sounds.play_sound('res/place.wav', .25);
