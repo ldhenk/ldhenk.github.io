@@ -907,7 +907,10 @@ gc.setDraw((paused, alpha, t) => {
 				const dx = x - .5 + quadDat[i*2] - light.x
 				const dy = y - .5 + 1 - quadDat[i*2+1] - light.y;
 				const rsq = dx * dx + dy * dy;
-				ligDat[i] = Math.max(ligDat[i], 1/(1 + rsq));
+
+				// put a hard cutoff before the real hard cutoff so it gets interpolated
+				const contrib = rsq > 81 ? 0 : 1/(1 + rsq);
+				ligDat[i] = Math.max(ligDat[i], contrib);
 				if(ligDat[i] > .75) ligDat[i] = .75;
 			}
 		}
