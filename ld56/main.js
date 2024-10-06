@@ -224,7 +224,6 @@ let haveLock = false;
 
 can.onkeydown = (e) => {
 	keys[e.keyCode] = true;
-	console.log(e.keyCode);
 	if(sounds.ac && sounds.ac.state === 'suspended'){
 		sounds.ac.resume();
 	}
@@ -894,9 +893,16 @@ gc.setDraw((paused, alpha, t) => {
 
 		const id = level[x + y*lw];
 		const disc = discovery[x + y * lw];
+
 		ligDat.fill(0);
+
 		for(let i = 0; i < lights.length; i++){
 			const light = lights[i];
+			const dx = x - light.x
+			const dy = y - light.y;
+			const dist = dx*dx + dy*dy;
+			if(dist > 100) continue;
+
 			for(let i = 0; i < ligDat.length; i++){
 				const dx = x - .5 + quadDat[i*2] - light.x
 				const dy = y - .5 + 1 - quadDat[i*2+1] - light.y;
@@ -905,6 +911,7 @@ gc.setDraw((paused, alpha, t) => {
 				if(ligDat[i] > .75) ligDat[i] = .75;
 			}
 		}
+
 
 		glc.bufferReplaceDat(ligDat, ligBuf);
 
