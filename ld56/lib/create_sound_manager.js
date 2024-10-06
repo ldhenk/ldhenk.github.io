@@ -64,7 +64,11 @@ function create_sound_manager(initial_sounds){
 		}
 		nodes.source.connect(nodes.gain);
 		nodes.gain.connect(ac.destination);
-		nodes.source.start();
+		if(opts.offset){
+			nodes.source.start(0, opts.offset);
+		}else{
+			nodes.source.start();
+		}
 		return nodes;
 	}
 

@@ -12,7 +12,8 @@ const sounds = create_sound_manager([
 	'res/break.wav',
 	'res/rock_land.wav',
 	'res/ant_kill.wav',
-	'res/jump.wav'
+	'res/jump.wav',
+	'res/howard.mp3'
 ]);
 
 const lw = 256;
@@ -224,6 +225,7 @@ let haveLock = false;
 
 can.onkeydown = (e) => {
 	keys[e.keyCode] = true;
+	start_song();
 	if(sounds.ac && sounds.ac.state === 'suspended'){
 		sounds.ac.resume();
 	}
@@ -255,6 +257,7 @@ document.onpointerlockchange = () => {
 	haveLock = !!document.pointerLockElement;
 	if(!haveLock){
 		can.blur();
+		stop_song();
 	}
 };
 
@@ -395,17 +398,46 @@ function closePopup(){
 document.getElementById('popup').onclick = () => {
 	can.focus();
 	can.requestPointerLock();
+	start_song();
 };
 
 const pause_overlay = document.getElementById('pause-indicator');
 pause_overlay.onclick = () => {
 	can.focus();
 	can.requestPointerLock();
+	start_song();
 };
 pause_overlay.innerText = 'Paused:\nClick to focus';
 
 let saw_intro = false;
 let saw_win = false;
+
+
+
+let song = null;
+function start_song(){
+	if(song) return;
+	song = sounds.play_sound('res/howard.mp3', .125, {
+		loop: true
+	}).then((nodes) => {
+		song = nodes;
+	}).catch((e) => {
+		console.log(e);
+		song = null;
+	});
+}
+
+async function stop_song(){
+	if(!song) return;
+
+	let s = song;
+	if(s instanceof Promise){
+		s = await s;
+	}
+
+	s.source.stop();
+	song = null;
+}
 
 let canjump = false;
 let pcool = 0;
