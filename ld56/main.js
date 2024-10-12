@@ -59,7 +59,7 @@ const discovery = new Uint8Array(lw * lw);
 const light = new Uint8Array(lw * lw);
 
 const vert = `
-	precision mediump float;
+	precision highp float;
 	attribute vec2 pos;
 	attribute float lig;
 	uniform vec2 off;
@@ -69,7 +69,7 @@ const vert = `
 	varying vec2 vscreenPos;
 	void main(){
 		vlig = lig;
-		vpos = vec2(pos.x, pos.y == 1.0 ? 0.0 : .99999); // TODO: WHYYYY
+		vpos = vec2(pos.x * .99999, pos.y == 1.0 ? 0.0 : .99999); // TODO: WHYYYY
 		vec2 screenPos = (pos + off) * scale;
 		vscreenPos = screenPos;
 		gl_Position = vec4(screenPos, 0, 1);
@@ -77,7 +77,11 @@ const vert = `
 `;
 
 const frag = `
-	precision mediump float;
+	#ifdef GL_FRAGMENT_PRECISION_HIGH
+		precision highp float; // desparate attempt to avoid texture bleed
+	#else
+		precision mediump float;
+	#endif
 	varying vec2 vpos;
 	uniform vec2 toff;
 	uniform sampler2D tex;
@@ -99,7 +103,7 @@ const frag = `
 
 
 const bvert = `
-	precision mediump float;
+	precision highp float;
 	attribute vec2 pos;
 	varying vec2 tpos;
 	uniform vec2 scale;
@@ -111,7 +115,11 @@ const bvert = `
 `;
 
 const bfrag = `
-	precision mediump float;
+	#ifdef GL_FRAGMENT_PRECISION_HIGH
+		precision highp float;
+	#else
+		precision mediump float;
+	#endif
 	uniform sampler2D back;
 	varying vec2 tpos;
 	void main(){
