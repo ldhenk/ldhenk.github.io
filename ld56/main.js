@@ -69,7 +69,7 @@ const vert = `
 	varying vec2 vscreenPos;
 	void main(){
 		vlig = lig;
-		vpos = vec2(pos.x * .99999, pos.y == 1.0 ? 0.0 : .99999); // TODO: WHYYYY
+		vpos = vec2(pos.x, 1.0-pos.y);
 		vec2 screenPos = (pos + off) * scale;
 		vscreenPos = screenPos;
 		gl_Position = vec4(screenPos, 0, 1);
@@ -89,7 +89,7 @@ const frag = `
 	uniform float glig;
 	varying vec2 vscreenPos;
 	void main(){
-		vec2 tpos = vpos / 16.0;
+		vec2 tpos = clamp(vpos, .03125, .96875) / 16.0; // clamp to avoid texture bleed
 		vec4 samp = texture2D(tex, toff + tpos);
 		if(vec3(samp) == vec3(0)) discard;
 		vec3 true_samp = pow(vec3(samp), vec3(2.2));
