@@ -343,10 +343,10 @@ function cell_from_coords(canx, cany, occupied_only){
 }
 
 function x_from_mouse_event(e){
-	return lerp(0, 500, (e.clientX - can.offsetLeft) / can.offsetWidth);
+	return lerp(0, 500, e.offsetX / can.offsetWidth);
 }
 function y_from_mouse_event(e){
-	return lerp(0, 500, (e.clientY - can.offsetTop) / can.offsetHeight);
+	return lerp(0, 500, e.offsetY / can.offsetHeight);
 }
 
 function cell_from_mouse_event(e, occupied_only){
