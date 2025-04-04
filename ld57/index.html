@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Placeholder Title</title>
+<link rel="icon" href="res/favicon.ico">
+<style>
+* { 
+	box-sizing: border-box;
+}
+
+body {
+	background-color: black;
+	color: #dddddd;
+	text-align: center;
+	padding: 0px;
+	margin: 0px;
+	height: 12288px;
+	position: relative;
+	font-family: sans-serif;
+}
+
+
+#canvas {
+	vertical-align: middle;
+	outline: none;
+	max-width: 100%;
+	image-rendering: crisp-edges;
+	image-rendering: pixelated;
+
+
+	clip-path: circle(50%);
+
+	/* This is sooo going into my copy-paste library
+	--chamfer-dist: 40px;
+	clip-path: polygon(
+		var(--chamfer-dist) 0px,
+		calc(100% - var(--chamfer-dist)) 0px,
+		100% var(--chamfer-dist),
+		100% calc(100% - var(--chamfer-dist)),
+		calc(100% - var(--chamfer-dist)) 100%,
+		var(--chamfer-dist) 100%,
+		0px calc(100% - var(--chamfer-dist)),
+		0px var(--chamfer-dist)
+	);
+	*/
+}
+
+#pain, #air {
+	position: relative;
+	width: 20px;
+	height: 100px;
+	background-color: #1d1d1d;
+
+	border-style: solid;
+	border-width: 1px;
+	border-color: #aaaaaa;
+}
+
+#air {
+	margin-left: 8px;
+}
+
+.fill {
+	position: absolute;
+	bottom: 0px;
+	width: 100%;
+}
+
+#pain .fill {
+	height: 0%;
+	background-color: red;
+}
+
+#air .fill {
+	background-color: cyan;
+	height: 100%;
+}
+
+@keyframes blinkr {
+	from {
+		background-color: #ffaaaa;
+	}
+
+	50% {
+		background-color: red;
+	}
+}
+
+@keyframes blinkb {
+	from {
+		background-color: #005555;
+	}
+
+	50% {
+		background-color: cyan;
+	}
+}
+
+.fill.danger {
+	animation-duration: 1s;
+	animation-iteration-count: infinite;
+	animation-timing-function: step-end;
+	animation-play-state: running;
+}
+
+#pain .fill.danger {
+	animation-name: blinkr;
+}
+
+#air .fill.danger {
+	animation-name: blinkb;
+}
+
+.fadein {
+	background-color: black;
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	transition: opacity 1s ease;
+	opacity: 1;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 2rem;
+	font-family: sans-serif;
+}
+
+.winfadein {
+	background-color: #52c1c1;
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	transition: opacity 5s ease;
+
+	opacity: 0;
+	display: none;
+}
+
+.winfadein .content {
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	top: 0px;
+	bottom: 0px;
+	transition: opacity 1s ease;
+	opacity: 0;
+	display: flex;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-family: sans-serif;
+	color: black;	
+}
+
+.winfadein .content h3 {
+	font-size: 3rem;
+	font-weight: bold;
+}
+
+.tut {
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	font-size: 2.5rem;
+}
+
+.tut-1 {
+	font-size: 3rem;
+	bottom: 50vh;
+}
+
+.tut-2 {
+	bottom: 100vh;
+	right: unset;
+	left: 60px;
+}
+
+.tut-3 {
+	font-size: 2.5rem;
+	bottom: 150vh;
+}
+
+.tut-4 {
+	bottom: 200vh;
+	left: unset;
+}
+.tut-5 {
+	right: unset;
+	left: 60px;
+	bottom: 250vh;
+}
+.tut-6 {
+	bottom: 300vh;
+}
+
+.tut-7 {
+	bottom: 3400px;
+	left: 50vw;
+}
+
+</style>
+
+
+</head>
+<body tabindex="0">
+<div style="display: inline-block; max-width: 100%; position: relative">
+	<canvas id="canvas" width="512" height="512"></canvas>
+</div>
+<div style="position: fixed; top: 10px; left: 10px; display: flex;">
+	<div id="pain"><div class="fill"></div></div>
+	<div id="air"><div class="fill"></div></div>
+</div>
+
+<div class="tut tut-1">Scroll up (slowly)</div>
+<div class="tut tut-2">⬅ You need to wait to decompress</div>
+<div class="tut tut-3">Or you will die</div>
+<div class="tut tut-4">Get to the top ➡</div>
+<div class="tut tut-5">⬅ Before O2 runs out</div>
+<div class="tut tut-6">Or you will die</div>
+<div class="tut tut-7">Avoid with mouse (or die)</div>
+
+
+<div class="fadein"><span class="inner" style="pointer-events: none">One moment...</span></div>
+<div class="winfadein">
+	<div class="content">
+		<h3>Thanks for playing</h3>
+		<p>Check out my other Ludum Dare entries <a href="https://ldjam.com/users/henk/games">Here</a>
+	</div>
+</div>
+
+<script src="lib/GameController.js"></script>
+<script src="lib/MatrixHelper.js"></script>
+<script src="lib/GLController.js"></script>
+<script src="lib/create_sound_manager.js"></script>
+<script src="lib/CubeFast.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
