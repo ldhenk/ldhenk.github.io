@@ -14,7 +14,7 @@ let img;
 			img = document.createElement('img');
 			img.onload = res;
 			img.onerror = rej;
-			img.src = '/res/texture.png';
+			img.src = 'res/texture.png';
 		});
 	}catch(e){
 		document.querySelector('.fadein').innerText = 'Error loading textures';
