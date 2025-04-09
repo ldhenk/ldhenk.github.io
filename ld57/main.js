@@ -651,7 +651,7 @@ function clamp(val, min, max){
 
 function init(first){
 	window.scrollTo(0, 1000000000);
-	canvasPos = 0;
+	canvasPos = window.innerHeight / 2 - canvasHeight / 2;
 	pain = 0;
 	air = 1;
 
