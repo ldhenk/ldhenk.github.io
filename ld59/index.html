@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head>
+<title>Outpost</title>
+</head>
+<style>
+* { 
+	box-sizing: border-box;
+}
+.control-item {
+	display: flex;
+	width: 10em;
+}
+
+.control-item > div:first-child {
+	flex-grow: 1;
+	text-align: left;
+}
+
+#loading-overlay {
+	position: fixed;
+	left: 0px;
+	right: 0px;
+	top: 0px;
+	bottom: 0px;
+	background-color: #000000bb;
+	text-align: center;
+	font-size: 3rem;
+	font-family: sans-serif;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+</style>
+<body style="background-color: #3d063f; color: #dddddd; text-align: center">
+<h1>Outpost</h1>
+<div style="display: inline-block; max-width: 95%; position: relative">
+	<canvas style="vertical-align: middle; outline: none; max-width: 100%; image-rendering: crisp-edges; image-rendering: pixelated" tabindex="0" id="canvas" width="512" height="512"></canvas>
+</div>
+
+<div style="font-family: sans-serif; font-weight: bold; font-size: 1.25rem; margin-top: 1rem">
+	<div>Controls</div>
+	<div style="display:flex;align-items:center;flex-direction:column">
+		<div class="control-item">
+			<div>Move</div>
+			<div>WASD</div>
+		</div>
+		<div class="control-item">
+			<div>Rotate</div>
+			<div>Arrows</div>
+		</div>
+		<div class="control-item">
+			<div>Interact</div>
+			<div>Space</div>
+		</div>
+	</div>
+</div>
+<div style="display:none">
+	<img src="res/Frame.png" id="framei">
+	<img src="res/Atlas.png" id="atlasi">
+	<img src="res/starfield.png" id="starfieldi">
+	<img src="res/Hatch.png" id="hatchi">
+	<img src="res/overlay1.png" id="overlayi">
+	<img src="res/overlay2.png" id="overlay2i">
+</div>
+<div id="loading-overlay"><div>Loading...</div></div>
+<script src="lib/CubeFast.js"></script>
+<script src="lib/GameController.js"></script>
+<script src="lib/MatrixHelper.js"></script>
+<script src="lib/GLController.js"></script>
+<script src="lib/create_sound_manager.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
