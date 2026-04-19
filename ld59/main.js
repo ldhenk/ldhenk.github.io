@@ -483,7 +483,7 @@ function delay(ms){
 
 async function play_vmm(){
 	function s(){
-		return sm.play_sound(sounds[1], .25);
+		return sm.play_sound(sounds[1], .125);
 	}
 	const d = 500;
 	await s();
@@ -676,7 +676,7 @@ function stepFun(t){
 	}
 
 	if(did_something){
-		sm.play_sound(sounds[0], .5);
+		sm.play_sound(sounds[0], .25);
 	}
 
 	const rotdrag = .7;
