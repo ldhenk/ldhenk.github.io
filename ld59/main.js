@@ -1111,20 +1111,28 @@ function draw_overlay({lou, lov, hiu, hiv, lox, loy, s, t, img}){
 	gl.drawArrays(gl.TRIANGLES, 0, 6);
 }
 
-function draw_popup_text({text: t, ty, fade}, flash){
+function draw_popup_text({text: t, ty, fade}, flash, interp){
 	if(fade){
-		draw_overlay({
-			lou: 14 / 128, lov: 28 / 128,
-			hiu: 15 / 128, hiv: 29 / 128,
-			lox: -1, loy: 1, s: 256
-		});
-
 		if(endgame){
+		 	let offx = ((lastTStep + interp) * .01) % (1.3 * 4);
+			draw_overlay({
+				lou: 0, lov: 0,
+				hiu: 8, hiv: 8,
+				lox: -1 - offx, loy: 1, s: 1.3,
+				img: images.starfield
+			});
+
 			const yoff = flash ? 0 : 1/32;
 			draw_overlay({
 				lou: 1/128, lov: 15/128,
 				hiu: 23/128, hiv: 26/128,
 				lox: -.25, loy: .25 + yoff, s: 3, img: images.overlay2
+			});
+		}else{
+			draw_overlay({
+				lou: 14 / 128, lov: 28 / 128,
+				hiu: 15 / 128, hiv: 29 / 128,
+				lox: -1, loy: 1, s: 256
 			});
 		}
 	}
@@ -1277,7 +1285,7 @@ function drawFun(paused, alpha, t){
 
 	const pop = have_popup();
 	if(pop){
-		draw_popup_text(pop, flash);
+		draw_popup_text(pop, flash, alpha);
 	}
 }
 gc.setDraw(drawFun);
