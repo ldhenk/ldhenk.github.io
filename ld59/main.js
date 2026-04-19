@@ -9,6 +9,8 @@ async function waitForImage(id){
 	});
 }
 
+let playing = null;
+
 const can = document.getElementById('canvas');
 const gc = new GameController();
 const gl = can.getContext('webgl', { antialias: false, stencil: true });
@@ -16,7 +18,8 @@ const glc = new GLController(gl, can.width, can.height);
 
 const sounds = [
 	'res/bip.wav',
-	'res/vmm.wav'
+	'res/vmm.wav',
+	'res/outpost.mp3'
 ];
 
 const sm = create_sound_manager(sounds);
@@ -435,6 +438,8 @@ let sanity_today = 0;
 let time = 0;
 let lastTStep = 0;
 
+let endgame = false;
+
 const dispatch_prefix = 'Message received from Dispatch\n\n';
 const arvan_prefix = 'Message received from Epsilon-5 via subspace transfer\n\n';
 
@@ -535,6 +540,11 @@ function reset_game(){
 	];
 	locked = false;
 	messages.push(time_messages.shift());
+	endgame = false;
+	if(playing){
+		playing.source.stop();
+		playing = null;
+	}
 }
 
 
@@ -568,6 +578,9 @@ function stepFun(t){
 
 	let did_something = false;
 	const pop = have_popup();
+	if(pop && pop.ty === 'locked'){
+		endgame = false;
+	}
 	if(key(' ', true)){
 		did_something = true;
 		if(pop){
@@ -845,6 +858,10 @@ const items = [
 			}else{
 				push_popup('Leave in escape pod?', (resp) => {
 					if(resp){
+						endgame = true;
+						sm.play_sound(sounds[2], 1, {loop: true}).then((nodes) => {
+							playing = nodes;
+						});
 						const messages = [];
 						messages.push('I transfer power and oxygen from the station to the escape pod and climb in.');
 						let i = 0;
@@ -1101,6 +1118,15 @@ function draw_popup_text({text: t, ty, fade}, flash){
 			hiu: 15 / 128, hiv: 29 / 128,
 			lox: -1, loy: 1, s: 256
 		});
+
+		if(endgame){
+			const yoff = flash ? 0 : 1/32;
+			draw_overlay({
+				lou: 1/128, lov: 15/128,
+				hiu: 23/128, hiv: 26/128,
+				lox: -.25, loy: .25 + yoff, s: 3, img: images.overlay2
+			});
+		}
 	}
 
 	draw_overlay({
