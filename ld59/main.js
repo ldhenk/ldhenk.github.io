@@ -1243,7 +1243,7 @@ function drawFun(paused, alpha, t){
 			const o2str = String(o2 * 10 + 10) + '%';
 			draw_text(o2str, 202, 1000, 55 + 18, amber_dim);
 
-			const powstr = String(4 * 11 + 12) + '%';
+			const powstr = String(power * 11 + 12) + '%';
 			draw_text(powstr, 202, 1000, 55 + 38, amber_dim);
 			draw_text(science_today ? 'Done' : 'Due', 202, 1000, 55 + 57, (!science_today && flash) ? amber : amber_dim);
 		}
