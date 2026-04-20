@@ -532,7 +532,7 @@ function reset_game(){
 		arvan_prefix + 'This is Arvan from Eps-5.  There\'s been an incident.  One of the O2 tanks exploded causing severe damage to the hull and myself.  I\'m ok for now but will need medical attention and an evac.',
 		dispatch_prefix + 'We are aware of the situation currently developing at Epsilon-5 and have begun working to resolve the issue.  For now, please ignore all subspace messages from Epsilon-5 and continue performing assigned tasks.',
 		arvan_prefix + 'Fuck.  Fuckfuckfuckfuckfuck.  You work for a company for 15 years and when shit hits the fan it\'s all "CLEAN UP TEAM SENT.  ETA 5W."  5 Weeks?!  I\'ll be dead by then you incompetent fucks!',
-		arvan_prefix + 'This is Arvan from Eps-5.  If anybody\'s out there, I need help.  You should have my coordinates.  It\'s only be a couple day\'s journey from one of the other epsilons.',
+		arvan_prefix + 'This is Arvan from Eps-5.  If anybody\'s out there, I need help.  You should have my coordinates.  It\'s only a couple day\'s journey from one of the other epsilons.',
 		arvan_prefix + 'Hi.  Arvan again.  Quick reminder that I\'m slowly bleeding out in Eps-5 and my o2 is at, like, 10%.  Eps-4, I think you\'re the only one actually getting these messages.  Nobody else is responding.',
 		arvan_prefix + 'Please?  I don\'t want to die.  I... I have kids.  Two little girls.  I just want to see their faces again.  Their names are Anna and um... Elsie.  I don\'t know how much longer I can hold out.',
 		arvan_prefix + 'OK fine I lied about the girls.  Spending years living in a tin can isn\'t exactly great for building a family.  Please send help.',
